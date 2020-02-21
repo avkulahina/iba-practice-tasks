@@ -4,7 +4,7 @@
 - All commits must be done using convention.
 - Create a `parser-structure-fix` branch from `master` branch
 - Switch to `parser-structure-fix` branch and start working from it
-- Do Task \#10
+- Do [Task \#14](task-practice-java14-refactor.md)
 - Add comment to DataBase.java with `/* I wrote complete wrong method here*/` and commit it `feat: add firstMethod`
 - Add comment to DataBase.java with `/* I wrote extremely great method here*/` and commit it `feat: add secondMethod`
 - Then you realized the commit with `feat: add firstMethod` was totaly wrong and you decided to create a new branch containing all the changes `parser-structure-fix-firstMethod`, but remove this wrong commit from you current branch. Do not change the code by yourself - do removal using git functionality.

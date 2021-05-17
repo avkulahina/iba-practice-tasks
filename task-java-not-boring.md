@@ -19,6 +19,7 @@
 
 - helpful resources 
 
+https://www.studytonight.com/java/
 https://www.programiz.com/java-programming/hello-world
 https://www.javatpoint.com/java-tutorial
 

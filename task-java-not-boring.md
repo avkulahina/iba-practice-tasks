@@ -92,6 +92,14 @@ https://developer.okta.com/blog/2019/12/26/java-mongodb-crud
 
 ## Task 4 - Add an Authentication mechanisim
 
+- Add [Swagger](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api) to the app, for easier access and documentation purposes
+
+- Add [logger](https://www.baeldung.com/spring-boot-logging). Add att least 3 messages with different logger levels: DEBUG, INFO, ERROR.
+
+- Add route `/authenticate` that will accept username and password, and return JWT token. All other routes must be secured using following http _Authorization_ header. Read this [article](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java).
+
+
+
 ## Task 5 - Add roles
 
 ## Task 6 - Add pagination

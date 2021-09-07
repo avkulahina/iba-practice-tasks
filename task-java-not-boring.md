@@ -150,6 +150,81 @@ Create a PR with screenshots it works for different roles.
 - [Sorable Shapes - Design Patterns](https://www.codewars.com/kata/586669a8442e3fc307000048)
 - [Black Jack: Conditional](https://www.codewars.com/kata/5bebcbf2832c3acc870000f6)
 
+## Task 7 - Use spring boot for addon creation
 
+Create Atlassian Jira addon that will be placed under issue description. Use ready js [assets](./assets), that will be a frontend part of your application.
 
+Js application sends requests to following routes:
 
+__GET /api/todo__
+
+_Should return a list of tasks in following format_
+```
+[
+    {"id":1,"description":"Some description", "completed":true},
+    {"id":2,"description":"Another task", "completed":true}
+]
+```
+
+__POST /api/todo__
+
+_Should create a new task_
+
+accept body
+```
+{description: "Description", completed: false}
+```
+returns created item
+```
+{id: 3, description: "Description", completed: false}
+```
+returns `500 Interal Server Error` in case of issues
+
+__PUT /api/todo__
+
+_Should update an existing task_
+
+accept body 
+```
+{id: 3, description: "Description", completed: false}
+```
+returns updated item
+```
+{id: 3, description: "Description", completed: false}
+```
+return `404 Not Found` if there is no such issue for this user
+
+returns `500 Interal Server Error` in case of issues
+
+__DELETE /api/todo/{id}__
+
+_Should delete profided issue by id_
+
+returns
+```
+{"message":"Deleted"}
+```
+return `404 Not Found` if there is no such issue for this user
+
+returns `500 Interal Server Error` in case of issues
+
+Also the frontend app sends an Authorization header taken from Jira instance, like following:
+
+```
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NTcwNTg6MzlmYzczZjMtOTJhYS00MzdkLWI2NTYtMDVjMGFkNDY5ODY1IiwicXNoIjoiY29udGV4dC1xc2giLCJpc3MiOiI0NjJhN2E4ZC05ZTU2LTNkNzktOWFkNi0xZWJmM2FkOTc0YzAiLCJjb250ZXh0Ijp7ImppcmEiOnsiaXNzdWUiOnsiaXNzdWV0eXBlIjp7ImlkIjoiMTAwMDIifSwia2V5IjoiVEVTVC0yIiwiaWQiOiIxMDAwMSJ9LCJwcm9qZWN0Ijp7ImtleSI6IlRFU1QiLCJpZCI6IjEwMDAwIn19fSwiZXhwIjoxNjMxMDMwNDE0LCJpYXQiOjE2MzEwMjk1MTR9.5LcM8jJC9zemMOkwJFXMfh7rPF10DZtmo_tkV23rtTQ
+```
+
+The token can be parsed. It contains information about issue and project from when the request is coming. You will have to parse and use in your HSQLDB to store information about issue.
+
+The task list must be unique for different users and different Jira issues. E.g. when you open issue `IS-01` you can create your own task list. When another user open the same issue he will have an empty list. He can fill it with his own items. When you open issue `IS-02` your list will be empty util you fill it.
+
+- create Private repo on Bitbucket
+- add yaveliki@gmail.com (Ana Kulahina) to Private repository
+- use [Atlassian Connect Spring Boot](https://bitbucket.org/atlassian/atlassian-connect-spring-boot/src/master/) to create your Atlassian addon
+- use [Entity Properies] or file HSQLDB to store your data. Note that HSQLDB will have limitations: every time you restart the app container the DB will be erased. You will have to re-register your application and create new data.
+- place your application on [Heroku](https://heroku.com/). Create README.md file and describe there information about your app (how to start, how to deploy). Also place a link to app descriptor there
+- create Bitbucket pipeline that will trigger deployment manually or by some other trigger (like add tag `release-X.X`). Bitbucket pipeline should push code/docker container to you Heroku app. Heroku should update the site.
+
+Useful links:
+- https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect/
+- https://developer.atlassian.com/cloud/jira/platform/issue-view/
